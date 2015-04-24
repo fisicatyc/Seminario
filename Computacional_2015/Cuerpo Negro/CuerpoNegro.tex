@@ -1,0 +1,49 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Edward Villegas}
+\title{Radiación de cuerpo negro numérica}
+\begin{document}
+El problema de la radiación de cuerpo negro esta descrito por la ley de Planck que es
+\begin{equation}
+B_\nu(\nu, T) = \frac{2h\nu^3}{c^2}\frac{1}{\exp\left(\frac{h\nu}{k_BT} -1\right)}. \label{eq:planck_v}
+\end{equation}
+\begin{enumerate}
+\item Para 5 valores diferentes de temperatura, determine la frecuencia a la cual se presenta la máxima emisividad.
+
+\textbf{Tip}: Optimización / Métodos basados en gradiente.
+
+\item Suponga, que las frecuencias de máxima emisividad cumplen una relación lineal con respecto a la temperatura. Usando el método de mínimos cuadrados, determine los coeficientes del polinomio lineal que determina esta relación. Compare el resultado con la ley de desplazamiento de Wien.
+
+\textbf{Tip}: Regresiones lineales / Solución iterativa de sistemas de ecuaciones lineales.
+
+\item Obtenga la aproximación de Rayleigh Jeans para bajas frecuencias $\nu \rightarrow 0$.
+
+\textbf{Tip}: Usando 3 valores de $\nu$, incluyendo $\nu=0$, anteriores a la frecuencia máxima a una temperatura fija, aplique interpolación de Newton (equivalente a la expansión de series de Taylor) o diferencia central en reemplazo de la derivada para la serie de Taylor.
+
+\item Obtenga numéricamente la constante de Stefan-Boltzmann, $\sigma$. 
+
+\textbf{Tip}: Para los 5 valores de temperatura usados, integrar ley de Planck sobre todas las frecuencias y angulo solido que determina una semiesfera. Esta consideración lleva al problema
+$$ j^* = \frac{2 \pi h}{c^2} \int_0^\infty \frac{\nu^3}{\exp\left(\frac{h\nu}{kT} \right)-1} d\nu = \sigma T^4. $$
+Tras un cambio de variable, es posible resolver el problema equivalente
+$$ j^* = \left(\frac{2 \pi k^4}{c^2 h^3} \int_0^\infty \frac{u^3}{\exp(u)-1} du \right) T^4 = \sigma T^4. $$
+
+\item Aproxime la constante de Stefan-Boltzmann partiendo de una interpolación de la la ley de Planck, con las mismas temperaturas y tomando 5 frecuencias para su interpolación (incluir $\nu=0$ y $\nu = \nu_{max}$, una frecuencia entre estas dos, y dos frecuencias posteriores a la frecuencia del máximo). Compare resultados con interpolación por \textit{splines} cúbicos y otra técnica de interpolación, y el resultado del numeral anterior.
+\end{enumerate}
+
+Información adicional:
+\begin{itemize}
+\item \href{http://en.wikipedia.org/wiki/Black-body_radiation#Equations}{Radiación de cuerpo negro}.
+\item \href{http://en.wikipedia.org/wiki/Stefan%E2%80%93Boltzmann_law#Derivation_from_Planck.27s_law}{Ley de Stefan-Boltzmann}.
+\item \href{http://en.wikipedia.org/wiki/Rayleigh%E2%80%93Jeans_law}{Ley de Rayleigh Jeans}.
+\item \href{http://en.wikipedia.org/wiki/Wien%27s_displacement_law}{Ley de Wien}.
+\end{itemize}
+
+\end{document}
